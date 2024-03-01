@@ -1,0 +1,7 @@
+SELECT
+    SCORE,
+    DENSE_RANK() OVER(
+        ORDER BY SCORE DESC
+    ) as "rank"
+FROM SCORES
+ORDER BY 2 ASC
