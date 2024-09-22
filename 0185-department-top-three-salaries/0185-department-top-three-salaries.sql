@@ -7,6 +7,7 @@ WITH SALARY_TABLE AS (
     FROM EMPLOYEE
 )
 
+
 SELECT 
     D.NAME AS Department,
     E.NAME AS Employee,
