@@ -1,4 +1,4 @@
-class Solution(object):
+class Solution:
     def trailingZeroes(self, n):
         trailing = 0
         while(n >= 5):
