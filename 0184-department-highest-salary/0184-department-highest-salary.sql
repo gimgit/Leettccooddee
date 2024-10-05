@@ -1,2 +1,16 @@
-# Write your MySQL query statement below
-select d.name as Department, e.name as Employee, e.salary as Salary from employee as e, department as d  where e.departmentId = d.id and (e.departmentId, salary) in (select departmentId, max(salary) from employee group by departmentId);
+WITH RANKED AS (
+    SELECT 
+        DEPARTMENTID,
+        SALARY,
+        NAME,
+        DENSE_RANK() OVER(PARTITION BY DEPARTMENTID ORDER BY SALARY DESC) AS NUM
+    FROM EMPLOYEE
+)
+SELECT 
+    D.NAME AS Department,
+    R.NAME AS Employee,
+    R.SALARY
+FROM RANKED AS R
+JOIN DEPARTMENT AS D
+ON R.DEPARTMENTID = D.ID
+WHERE NUM = 1
