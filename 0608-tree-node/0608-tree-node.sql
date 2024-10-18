@@ -1,4 +1,3 @@
--- Write your PostgreSQL query statement below
 SELECT
     DISTINCT
         T.ID,
