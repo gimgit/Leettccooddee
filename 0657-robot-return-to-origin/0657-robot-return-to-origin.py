@@ -8,4 +8,4 @@ class Solution:
             counter = Counter(moves)
             isUpDownSame = counter['U'] == counter['D']
             isLeftRightSame = counter['R'] == counter['L']
-            return  isUpDownSame and isLeftRightSame
+            return isUpDownSame and isLeftRightSame
