@@ -1,7 +1,10 @@
 class Solution:
-    def twoSum_bruteforce(self, nums, target):
-        n = len(nums)
-        for i in range(n):
-            for j in range(i + 1, n):
-                if nums[i] + nums[j] == target:
-                    return [i, j]
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        d = {}
+        for i in range(len(nums)):
+            if target - nums[i] not in d:
+                d[nums[i]] = i
+            else:
+                return [d[target - nums[i]], i]
+
+
