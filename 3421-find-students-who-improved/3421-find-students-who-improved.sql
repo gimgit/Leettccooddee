@@ -1,0 +1,38 @@
+WITH CANDIDATES AS (
+    SELECT
+        STUDENT_ID,
+        SUBJECT,
+        SCORE,
+        exam_date,
+        LAG(SCORE) OVER(PARTITION BY STUDENT_ID, SUBJECT ORDER BY EXAM_DATE) AS pre_score,
+        LEAD(SCORE) OVER(PARTITION BY STUDENT_ID, SUBJECT ORDER BY EXAM_DATE) AS next_score
+    FROM SCORES
+),
+FIRST_TRY AS (
+    SELECT
+        STUDENT_ID,
+        SCORE,
+        SUBJECT,
+        EXAM_DATE
+    FROM CANDIDATES
+    WHERE pre_score IS NULL
+),
+LAST_TRY AS (
+    SELECT
+        STUDENT_ID,
+        SCORE,
+        SUBJECT,
+        EXAM_DATE
+    FROM CANDIDATES
+    WHERE next_score IS NULL
+)
+SELECT 
+    F.student_id,
+    F.subject,
+    F.SCORE AS first_score,
+    L.SCORE AS latest_score
+FROM FIRST_TRY AS F
+JOIN LAST_TRY AS L
+ON F.STUDENT_ID = L.STUDENT_ID
+AND F.SUBJECT = L.SUBJECT
+WHERE F.SCORE < L.SCORE
