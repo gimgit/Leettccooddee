@@ -1,11 +1,11 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         candidates = []
-        if nums:
-            for i in range(len(nums)):
-                if nums[i] == target:
-                    candidates.append(i)
-        if candidates:
-            return [min(candidates), max(candidates)]
-        else:
-            return [-1, -1]
+        for i in range(len(nums)):
+            print(nums[i])
+            if nums[i] == target:
+                candidates.append(i)
+        
+        if len(candidates):
+            return [candidates[0], candidates[-1]]
+        return [-1, -1]
