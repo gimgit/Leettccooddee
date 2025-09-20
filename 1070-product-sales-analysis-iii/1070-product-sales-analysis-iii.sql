@@ -1,0 +1,16 @@
+WITH CTE AS (
+SELECT
+    PRODUCT_ID,
+    QUANTITY,
+    PRICE,
+    YEAR,
+    DENSE_RANK() OVER(PARTITION BY PRODUCT_ID ORDER BY YEAR) AS RN
+FROM SALES
+)
+SELECT 
+    product_id,
+    YEAR AS first_year,
+    quantity,
+    price
+FROM CTE
+WHERE RN = 1
