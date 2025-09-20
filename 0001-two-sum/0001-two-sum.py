@@ -1,6 +1,7 @@
 class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        for j in range(0, len(nums) - 1):
-            for i in range(1, len(nums)):
-                if i != j and nums[j] + nums[i] == target:
-                    return [j, i]
+    def twoSum_bruteforce(self, nums, target):
+        n = len(nums)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
