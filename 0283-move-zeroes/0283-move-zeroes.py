@@ -4,4 +4,3 @@ class Solution:
         for i in range(zeroes):
             nums.remove(0)
             nums.append(0)
-
